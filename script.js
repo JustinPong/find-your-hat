@@ -28,6 +28,8 @@ class Field {
     if (this.field[this.y][this.x] === hat) {
       document.getElementById("message").textContent =
         "You won! You've found the hat!";
+      document.getElementById("restart-btn").textContent = "Play Again";
+      document.getElementById("restart-btn").style.display = "block";
       return true;
     }
     return false;
@@ -37,6 +39,8 @@ class Field {
     if (this.field[this.y][this.x] === hole) {
       document.getElementById("message").textContent =
         "You lost! You fell in the hole!";
+      document.getElementById("restart-btn").textContent = "Restart";
+      document.getElementById("restart-btn").style.display = "block";
       return true;
     }
     return false;
@@ -53,23 +57,64 @@ class Field {
     }
     document.getElementById("message").textContent =
       "You lost! You're out of bounds!";
+    document.getElementById("restart-btn").textContent = "Restart";
+    document.getElementById("restart-btn").style.display = "block";
     return false;
   }
 
-  static generateField(height, width, percentage) {
-    const field = new Array(height).fill(0).map(() => new Array(width));
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        const prob = Math.random();
-        field[y][x] = prob > percentage ? fieldCharacter : hole;
+  static generateField(height, width, holePercentage) {
+    let field;
+    do {
+      field = new Array(height)
+        .fill(0)
+        .map(() => new Array(width).fill(fieldCharacter));
+      let totalCells = height * width;
+      let holeCount = Math.floor(totalCells * holePercentage);
+
+      while (holeCount > 0) {
+        let x = Math.floor(Math.random() * width);
+        let y = Math.floor(Math.random() * height);
+        if (field[y][x] === fieldCharacter) {
+          field[y][x] = hole;
+          holeCount--;
+        }
       }
-    }
-    const hatLocation = {
-      x: Math.floor(Math.random() * width),
-      y: Math.floor(Math.random() * height),
-    };
-    field[hatLocation.y][hatLocation.x] = hat;
+
+      const hatLocation = {
+        x: Math.floor(Math.random() * width),
+        y: Math.floor(Math.random() * height),
+      };
+      field[hatLocation.y][hatLocation.x] = hat;
+    } while (!Field.isWinnable(field));
     return field;
+  }
+
+  static isWinnable(field) {
+    const height = field.length;
+    const width = field[0].length;
+    const visited = Array.from({ length: height }, () =>
+      Array(width).fill(false)
+    );
+
+    const dfs = (x, y) => {
+      if (
+        x < 0 ||
+        y < 0 ||
+        x >= width ||
+        y >= height ||
+        visited[y][x] ||
+        field[y][x] === hole
+      ) {
+        return false;
+      }
+      if (field[y][x] === hat) {
+        return true;
+      }
+      visited[y][x] = true;
+      return dfs(x + 1, y) || dfs(x - 1, y) || dfs(x, y + 1) || dfs(x, y - 1);
+    };
+
+    return dfs(0, 0);
   }
 
   randomStart() {
@@ -95,6 +140,7 @@ class Field {
     this.randomStart();
     this.print();
     document.getElementById("message").textContent = "Find your hat!";
+    document.getElementById("restart-btn").style.display = "none";
   }
 }
 
@@ -103,7 +149,7 @@ function startGame(holePercentage) {
   const myField = new Field(randomField);
   myField.playGame();
 
-  document.addEventListener("keydown", function handleKey(event) {
+  function handleKey(event) {
     switch (event.key) {
       case "ArrowUp":
         myField.y--;
@@ -124,7 +170,9 @@ function startGame(holePercentage) {
       document.removeEventListener("keydown", handleKey);
     }
     myField.print();
-  });
+  }
+
+  document.addEventListener("keydown", handleKey);
 }
 
 document.querySelectorAll(".difficulty-btn").forEach((button) => {
@@ -132,16 +180,23 @@ document.querySelectorAll(".difficulty-btn").forEach((button) => {
     let holePercentage;
     switch (button.getAttribute("data-difficulty")) {
       case "easy":
-        holePercentage = 0.1;
-        break;
-      case "medium":
         holePercentage = 0.2;
         break;
-      case "hard":
+      case "medium":
         holePercentage = 0.3;
+        break;
+      case "hard":
+        holePercentage = 0.4;
         break;
     }
     document.getElementById("difficulty-selection").style.display = "none";
     startGame(holePercentage);
   });
+});
+
+document.getElementById("restart-btn").addEventListener("click", () => {
+  document.getElementById("difficulty-selection").style.display = "block";
+  document.getElementById("field").innerHTML = "";
+  document.getElementById("message").textContent = "";
+  document.getElementById("restart-btn").style.display = "none";
 });

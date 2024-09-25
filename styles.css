@@ -31,7 +31,7 @@ p {
     font-size: 18px;
 }
 
-.difficulty-btn {
+.difficulty-btn, #restart-btn {
     padding: 10px 20px;
     margin: 5px;
     font-size: 16px;
@@ -43,7 +43,7 @@ p {
     transition: background-color 0.3s;
 }
 
-.difficulty-btn:hover {
+.difficulty-btn:hover, #restart-btn:hover {
     background-color: #0056b3;
 }
 
