@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f8ff;
+}
+
+#game-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#field {
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: inline-block;
+    line-height: 1.5;
+}
+
+p {
+    margin: 10px;
+    font-size: 18px;
+}
+
+.difficulty-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.difficulty-btn:hover {
+    background-color: #0056b3;
+}
+
+svg {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
