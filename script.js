@@ -71,6 +71,7 @@ class Field {
       field = new Array(height)
         .fill(0)
         .map(() => new Array(width).fill(fieldCharacter));
+
       let totalCells = height * width;
       let holeCount = Math.floor(totalCells * holePercentage);
 
