@@ -1,87 +1,36 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Your Hat Game</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <div id="game-container">
-      <h1>Find Your Hat</h1>
-      <div id="instructions">
-        <p>Welcome to "Find Your Hat"!</p>
-        <p>Your goal is to navigate through the field and find your hat:</p>
-        <div class="condition">
-          <strong>Winning Condition:</strong> Reach the hat
-          <span class="icon"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="brown"
-            >
-              <path
-                d="M12 2l-8 8h16l-8-8zM4 10v2h16v-2H4zm0 4v2h16v-2H4z"
-              /></svg
-          ></span>
-          without falling into any holes or going out of bounds.
+        <h1>Find Your Hat</h1>
+        <div id="instructions">
+            <p>Welcome to "Find Your Hat"!</p>
+            <p>Your goal is to navigate through the field and find your hat:</p>
+            <div class="condition">
+                <strong>Winning Condition:</strong> Reach the hat <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="brown"><path d="M12 2l-8 8h16l-8-8zM4 10v2h16v-2H4zm0 4v2h16v-2H4z"/></svg></span> without falling into any holes or going out of bounds.
+            </div>
+            <div class="condition">
+                <strong>Losing Condition:</strong> You lose if you fall into a hole <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><ellipse cx="12" cy="12" rx="10" ry="5"/></svg></span> or if you move out of the field's borders.
+            </div>
+            <p>Use the arrow keys on your keyboard to move your character <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="blue"><circle cx="12" cy="8" r="4"/><path d="M12 12c-2.21 0-4 1.79-4 4v4h8v-4c0-2.21-1.79-4-4-4z"/></svg></span>. As you move, footprints will mark your path.</p>
         </div>
-        <div class="condition">
-          <strong>Losing Condition:</strong> You lose if you fall into a hole
-          <span class="icon"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="black"
-            >
-              <ellipse cx="12" cy="12" rx="10" ry="5" /></svg
-          ></span>
-          or if you move out of the field's borders.
+        <div id="difficulty-selection">
+            <p>Select Difficulty:</p>
+            <button class="difficulty-btn" data-difficulty="easy" aria-label="Easy Difficulty">Easy</button>
+            <button class="difficulty-btn" data-difficulty="medium" aria-label="Medium Difficulty">Medium</button>
+            <button class="difficulty-btn" data-difficulty="hard" aria-label="Hard Difficulty">Hard</button>
         </div>
-        <p>
-          Use the arrow keys on your keyboard to move your character
-          <span class="icon"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="blue"
-            >
-              <circle cx="12" cy="8" r="4" />
-              <path
-                d="M12 12c-2.21 0-4 1.79-4 4v4h8v-4c0-2.21-1.79-4-4-4z"
-              /></svg></span
-          >. As you move, footprints will mark your path.
-        </p>
-      </div>
-      <div id="difficulty-selection">
-        <p>Select Difficulty:</p>
-        <button
-          class="difficulty-btn"
-          data-difficulty="easy"
-          aria-label="Easy Difficulty"
-        >
-          Easy
-        </button>
-        <button
-          class="difficulty-btn"
-          data-difficulty="medium"
-          aria-label="Medium Difficulty"
-        >
-          Medium
-        </button>
-        <button
-          class="difficulty-btn"
-          data-difficulty="hard"
-          aria-label="Hard Difficulty"
-        >
-          Hard
-        </button>
-      </div>
-      <div id="field" role="grid" aria-label="Game Field"></div>
-      <p id="message" role="alert"></p>
-      <button id="restart-btn" style="display: none">Restart</button>
+        <div id="field" role="grid" aria-label="Game Field" style="display: none;"></div>
+        <p id="message" role="alert"></p>
+        <button id="restart-btn" style="display: none;">Restart</button>
     </div>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

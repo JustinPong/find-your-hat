@@ -160,6 +160,8 @@ function startGame(holePercentage) {
   const myField = new Field(randomField);
   myField.playGame();
 
+  document.getElementById("field").style.display = "block"; // Show the field
+
   function handleKey(event) {
     let newX = myField.x;
     let newY = myField.y;
@@ -210,6 +212,7 @@ document.querySelectorAll(".difficulty-btn").forEach((button) => {
 
 document.getElementById("restart-btn").addEventListener("click", () => {
   document.getElementById("difficulty-selection").style.display = "block";
+  document.getElementById("field").style.display = "none";
   document.getElementById("field").innerHTML = "";
   document.getElementById("message").textContent = "";
   document.getElementById("restart-btn").style.display = "none";
