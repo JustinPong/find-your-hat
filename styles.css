@@ -6,17 +6,20 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #f0f8ff;
+  background-color: #eef2f7;
 }
 
 #game-container {
   text-align: center;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   max-width: 90%;
   box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  margin: 15px;
 }
 
 #instructions {
@@ -43,14 +46,18 @@ body {
   vertical-align: middle;
 }
 
+/* Game field styling */
 #field {
   font-family: "Courier New", Courier, monospace;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
+  background-color: #f4f4f9;
   display: inline-block;
   line-height: 1.5;
   overflow-x: auto;
   white-space: nowrap;
+  padding: 10px;
+  border-radius: 5px;
   width: min-content;
   margin: 0 auto;
 }
@@ -60,15 +67,24 @@ p {
   font-size: 18px;
 }
 
+/* Flex container for buttons */
+#button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+  flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+  margin-top: 20px;
+}
+
 .difficulty-btn {
-  padding: 10px 20px;
+  padding: 12px 24px;
   margin: 5px;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   color: #fff;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
 }
 
 .difficulty-btn[data-difficulty="easy"] {
@@ -84,29 +100,66 @@ p {
 }
 
 .difficulty-btn:hover {
-  opacity: 0.8;
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.difficulty-btn:active {
+  transform: translateY(0);
 }
 
 #play-again-btn,
-#select-difficulty-btn {
-  padding: 10px 20px;
+#select-difficulty-btn,
+#restart-btn {
+  padding: 12px 24px;
   margin: 5px;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   background-color: #007bff;
   color: #fff;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
 }
 
 #play-again-btn:hover,
-#select-difficulty-btn:hover {
+#select-difficulty-btn:hover,
+#restart-btn:hover {
   background-color: #0056b3;
+}
+
+#play-again-btn:active,
+#select-difficulty-btn:active,
+#restart-btn:active {
+  transform: translateY(0);
 }
 
 svg {
   width: 20px;
   height: 20px;
   vertical-align: middle;
+}
+
+/* Responsiveness for smaller screens */
+@media only screen and (max-width: 600px) {
+  #game-container {
+    padding: 20px;
+  }
+
+  .difficulty-btn,
+  #play-again-btn,
+  #select-difficulty-btn,
+  #restart-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  #button-container {
+    flex-direction: column; /* Stack buttons vertically on small screens */
+    gap: 10px;
+  }
 }
