@@ -78,7 +78,6 @@ p {
 
 .difficulty-btn[data-difficulty="medium"] {
   background-color: #ffc107; /* Yellow */
-  color: #333;
 }
 
 .difficulty-btn[data-difficulty="hard"] {
