@@ -156,7 +156,7 @@ class Field {
 }
 
 function startGame(holePercentage) {
-  const randomField = Field.generateField(5, 5, holePercentage);
+  const randomField = Field.generateField(10, 10, holePercentage); // Increased size to 10x10
   const myField = new Field(randomField);
   myField.playGame();
 
