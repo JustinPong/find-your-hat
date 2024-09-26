@@ -31,8 +31,8 @@ class Field {
     if (this.field[this.y][this.x] === hat) {
       document.getElementById("message").textContent =
         "You won! You've found the hat!";
-      document.getElementById("restart-btn").textContent = "Play Again";
-      document.getElementById("restart-btn").style.display = "block";
+      document.getElementById("play-again-btn").style.display = "block";
+      document.getElementById("select-difficulty-btn").style.display = "block";
       return true;
     }
     return false;
@@ -42,8 +42,8 @@ class Field {
     if (this.field[this.y][this.x] === hole) {
       document.getElementById("message").textContent =
         "You lost! You fell in the hole!";
-      document.getElementById("restart-btn").textContent = "Restart";
-      document.getElementById("restart-btn").style.display = "block";
+      document.getElementById("play-again-btn").style.display = "block";
+      document.getElementById("select-difficulty-btn").style.display = "block";
       return true;
     }
     return false;
@@ -60,8 +60,8 @@ class Field {
     }
     document.getElementById("message").textContent =
       "You lost! You're out of bounds!";
-    document.getElementById("restart-btn").textContent = "Restart";
-    document.getElementById("restart-btn").style.display = "block";
+    document.getElementById("play-again-btn").style.display = "block";
+    document.getElementById("select-difficulty-btn").style.display = "block";
     return false;
   }
 
@@ -151,12 +151,16 @@ class Field {
     this.randomStart();
     this.print();
     document.getElementById("message").textContent = "Find your hat!";
-    document.getElementById("restart-btn").style.display = "none";
+    document.getElementById("play-again-btn").style.display = "none";
+    document.getElementById("select-difficulty-btn").style.display = "none";
   }
 }
 
+let currentHolePercentage = 0.2; // Default difficulty
+
 function startGame(holePercentage) {
-  const randomField = Field.generateField(10, 10, holePercentage); // Increased size to 10x10
+  currentHolePercentage = holePercentage;
+  const randomField = Field.generateField(10, 10, holePercentage);
   const myField = new Field(randomField);
   myField.playGame();
 
@@ -210,10 +214,17 @@ document.querySelectorAll(".difficulty-btn").forEach((button) => {
   });
 });
 
-document.getElementById("restart-btn").addEventListener("click", () => {
-  document.getElementById("difficulty-selection").style.display = "block";
-  document.getElementById("field").style.display = "none";
-  document.getElementById("field").innerHTML = "";
-  document.getElementById("message").textContent = "";
-  document.getElementById("restart-btn").style.display = "none";
+document.getElementById("play-again-btn").addEventListener("click", () => {
+  startGame(currentHolePercentage);
 });
+
+document
+  .getElementById("select-difficulty-btn")
+  .addEventListener("click", () => {
+    document.getElementById("difficulty-selection").style.display = "block";
+    document.getElementById("field").style.display = "none";
+    document.getElementById("field").innerHTML = "";
+    document.getElementById("message").textContent = "";
+    document.getElementById("play-again-btn").style.display = "none";
+    document.getElementById("select-difficulty-btn").style.display = "none";
+  });

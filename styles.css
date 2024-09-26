@@ -88,7 +88,8 @@ p {
   opacity: 0.8;
 }
 
-#restart-btn {
+#play-again-btn,
+#select-difficulty-btn {
   padding: 10px 20px;
   margin: 5px;
   font-size: 16px;
@@ -100,7 +101,8 @@ p {
   transition: background-color 0.3s;
 }
 
-#restart-btn:hover {
+#play-again-btn:hover,
+#select-difficulty-btn:hover {
   background-color: #0056b3;
 }
 
