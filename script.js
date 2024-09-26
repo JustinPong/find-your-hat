@@ -66,7 +66,7 @@ class Field {
   }
 
   static generateField(height, width, holePercentage) {
-    let field;
+    let field, startX, startY;
     do {
       field = new Array(height)
         .fill(0)
@@ -75,6 +75,7 @@ class Field {
       let totalCells = height * width;
       let holeCount = Math.floor(totalCells * holePercentage);
 
+      // Randomly place holes
       while (holeCount > 0) {
         let x = Math.floor(Math.random() * width);
         let y = Math.floor(Math.random() * height);
@@ -84,16 +85,26 @@ class Field {
         }
       }
 
+      // Place the hat
       const hatLocation = {
         x: Math.floor(Math.random() * width),
         y: Math.floor(Math.random() * height),
       };
       field[hatLocation.y][hatLocation.x] = hat;
-    } while (!Field.isWinnable(field));
-    return field;
+
+      // Find a random start point that is not the hat
+      do {
+        startX = Math.floor(Math.random() * width);
+        startY = Math.floor(Math.random() * height);
+      } while (field[startY][startX] === hat || field[startY][startX] === hole);
+
+      field[startY][startX] = pathCharacter; // Mark starting point
+    } while (!Field.isWinnable(field, startX, startY)); // Check winnability from the start point
+
+    return { field, startX, startY };
   }
 
-  static isWinnable(field) {
+  static isWinnable(field, startX, startY) {
     const height = field.length;
     const width = field[0].length;
     const visited = Array.from({ length: height }, () =>
@@ -115,21 +126,12 @@ class Field {
         return true;
       }
       visited[y][x] = true;
+      // Explore all four directions
       return dfs(x + 1, y) || dfs(x - 1, y) || dfs(x, y + 1) || dfs(x, y - 1);
     };
 
-    return dfs(0, 0);
-  }
-
-  randomStart() {
-    let startX, startY;
-    do {
-      startX = Math.floor(Math.random() * this.field[0].length);
-      startY = Math.floor(Math.random() * this.field.length);
-    } while (this.field[startY][startX] === hat);
-    this.x = startX;
-    this.y = startY;
-    this.field[this.y][this.x] = pathCharacter;
+    // Start DFS from the player's starting point
+    return dfs(startX, startY);
   }
 
   checkWin() {
@@ -148,8 +150,9 @@ class Field {
     this.y = newY;
   }
 
-  playGame() {
-    this.randomStart();
+  playGame(startX, startY) {
+    this.x = startX;
+    this.y = startY;
     this.print();
     document.getElementById("message").textContent = "Find your hat!";
     document.getElementById("play-again-btn").style.display = "none";
@@ -161,9 +164,9 @@ let currentHolePercentage = 0.2; // Default difficulty
 
 function startGame(holePercentage) {
   currentHolePercentage = holePercentage;
-  const randomField = Field.generateField(10, 10, holePercentage);
-  const myField = new Field(randomField);
-  myField.playGame();
+  const { field, startX, startY } = Field.generateField(10, 10, holePercentage);
+  const myField = new Field(field);
+  myField.playGame(startX, startY);
 
   document.getElementById("field").style.display = "block"; // Show the field
 
