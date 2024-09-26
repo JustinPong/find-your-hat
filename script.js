@@ -33,8 +33,8 @@ class Field {
     if (this.field[this.y][this.x] === hat) {
       document.getElementById("message").textContent =
         "You won! You've found the hat!";
-      document.getElementById("play-again-btn").style.display = "block";
-      document.getElementById("select-difficulty-btn").style.display = "block";
+      document.getElementById("next-map-btn").style.display = "block";
+      document.getElementById("exit-btn").style.display = "block";
       document.getElementById("restart-btn").style.display = "none"; // Hide Restart Button on win
       return true;
     }
@@ -45,8 +45,8 @@ class Field {
     if (this.field[this.y][this.x] === hole) {
       document.getElementById("message").textContent =
         "You lost! You fell in the hole!";
-      document.getElementById("play-again-btn").style.display = "block";
-      document.getElementById("select-difficulty-btn").style.display = "block";
+      document.getElementById("next-map-btn").style.display = "block";
+      document.getElementById("exit-btn").style.display = "block";
       document.getElementById("restart-btn").style.display = "block"; // Show Restart Button
       return true;
     }
@@ -64,8 +64,8 @@ class Field {
     }
     document.getElementById("message").textContent =
       "You lost! You're out of bounds!";
-    document.getElementById("play-again-btn").style.display = "block";
-    document.getElementById("select-difficulty-btn").style.display = "block";
+    document.getElementById("next-map-btn").style.display = "block";
+    document.getElementById("exit-btn").style.display = "block";
     document.getElementById("restart-btn").style.display = "block"; // Show Restart Button
     return false;
   }
@@ -166,8 +166,8 @@ class Field {
     this.field[this.y][this.x] = pathCharacter; // Ensure the player is placed at the starting point
     this.print();
     document.getElementById("message").textContent = "Find your hat!";
-    document.getElementById("play-again-btn").style.display = "none";
-    document.getElementById("select-difficulty-btn").style.display = "none";
+    document.getElementById("next-map-btn").style.display = "none";
+    document.getElementById("exit-btn").style.display = "none";
     document.getElementById("restart-btn").style.display = "none"; // Hide Restart Button at the start
   }
 
@@ -280,7 +280,7 @@ document.querySelectorAll(".difficulty-btn").forEach((button) => {
   });
 });
 
-document.getElementById("play-again-btn").addEventListener("click", () => {
+document.getElementById("next-map-btn").addEventListener("click", () => {
   startGame(currentHolePercentage);
 });
 
@@ -288,14 +288,12 @@ document.getElementById("restart-btn").addEventListener("click", () => {
   restartGame();
 });
 
-document
-  .getElementById("select-difficulty-btn")
-  .addEventListener("click", () => {
-    document.getElementById("difficulty-selection").style.display = "block";
-    document.getElementById("field").style.display = "none";
-    document.getElementById("field").innerHTML = "";
-    document.getElementById("message").textContent = "";
-    document.getElementById("play-again-btn").style.display = "none";
-    document.getElementById("select-difficulty-btn").style.display = "none";
-    document.getElementById("restart-btn").style.display = "none"; // Hide Restart Button
-  });
+document.getElementById("exit-btn").addEventListener("click", () => {
+  document.getElementById("difficulty-selection").style.display = "block";
+  document.getElementById("field").style.display = "none";
+  document.getElementById("field").innerHTML = "";
+  document.getElementById("message").textContent = "";
+  document.getElementById("next-map-btn").style.display = "none";
+  document.getElementById("exit-btn").style.display = "none";
+  document.getElementById("restart-btn").style.display = "none"; // Hide Restart Button
+});

@@ -108,8 +108,8 @@ p {
   transform: translateY(0);
 }
 
-#play-again-btn,
-#select-difficulty-btn,
+#next-map-btn,
+#exit-btn,
 #restart-btn {
   padding: 12px 24px;
   margin: 5px;
@@ -122,14 +122,14 @@ p {
   transition: background-color 0.3s, transform 0.2s ease-in-out;
 }
 
-#play-again-btn:hover,
-#select-difficulty-btn:hover,
+#next-map-btn:hover,
+#exit-btn:hover,
 #restart-btn:hover {
   background-color: #0056b3;
 }
 
-#play-again-btn:active,
-#select-difficulty-btn:active,
+#next-map-btn:active,
+#exit-btn:active,
 #restart-btn:active {
   transform: translateY(0);
 }
@@ -147,8 +147,8 @@ svg {
   }
 
   .difficulty-btn,
-  #play-again-btn,
-  #select-difficulty-btn,
+  #next-map-btn,
+  #exit-btn,
   #restart-btn {
     padding: 10px 20px;
     font-size: 14px;
