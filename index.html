@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +12,13 @@
         <h1>Find Your Hat</h1>
         <div id="difficulty-selection">
             <p>Select Difficulty:</p>
-            <button class="difficulty-btn" data-difficulty="easy">Easy</button>
-            <button class="difficulty-btn" data-difficulty="medium">Medium</button>
-            <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+            <button class="difficulty-btn" data-difficulty="easy" aria-label="Easy Difficulty">Easy</button>
+            <button class="difficulty-btn" data-difficulty="medium" aria-label="Medium Difficulty">Medium</button>
+            <button class="difficulty-btn" data-difficulty="hard" aria-label="Hard Difficulty">Hard</button>
         </div>
-        <div id="field"></div>
+        <div id="field" role="grid" aria-label="Game Field"></div>
         <p>Use the arrow keys to move.</p>
-        <p id="message"></p>
+        <p id="message" role="alert"></p>
         <button id="restart-btn" style="display: none;">Restart</button>
     </div>
     <script src="script.js"></script>

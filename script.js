@@ -1,13 +1,16 @@
+// script.js
 const hat = "^";
 const hole = "O";
 const fieldCharacter = "░";
 const pathCharacter = "*";
+const footprintCharacter = ".";
 
 const icons = {
   [hat]: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="brown"><path d="M12 2l-8 8h16l-8-8zM4 10v2h16v-2H4zm0 4v2h16v-2H4z"/></svg>`,
   [hole]: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><ellipse cx="12" cy="12" rx="10" ry="5"/></svg>`,
   [pathCharacter]: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="blue"><circle cx="12" cy="8" r="4"/><path d="M12 12c-2.21 0-4 1.79-4 4v4h8v-4c0-2.21-1.79-4-4-4z"/></svg>`,
   [fieldCharacter]: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="lightgrey"><rect width="24" height="24" fill="none"/></svg>`,
+  [footprintCharacter]: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="darkgrey"><circle cx="12" cy="12" r="2"/></svg>`,
 };
 
 class Field {
@@ -136,6 +139,14 @@ class Field {
     return true;
   }
 
+  moveCharacter(newX, newY) {
+    if (this.isInBounds()) {
+      this.field[this.y][this.x] = footprintCharacter;
+    }
+    this.x = newX;
+    this.y = newY;
+  }
+
   playGame() {
     this.randomStart();
     this.print();
@@ -150,22 +161,25 @@ function startGame(holePercentage) {
   myField.playGame();
 
   function handleKey(event) {
+    let newX = myField.x;
+    let newY = myField.y;
     switch (event.key) {
       case "ArrowUp":
-        myField.y--;
+        newY--;
         break;
       case "ArrowLeft":
-        myField.x--;
+        newX--;
         break;
       case "ArrowDown":
-        myField.y++;
+        newY++;
         break;
       case "ArrowRight":
-        myField.x++;
+        newX++;
         break;
       default:
         return; // Ignore other keys
     }
+    myField.moveCharacter(newX, newY);
     if (!myField.checkWin()) {
       document.removeEventListener("keydown", handleKey);
     }
